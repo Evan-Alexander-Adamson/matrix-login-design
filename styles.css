@@ -1,0 +1,170 @@
+body {
+    background-color: #121212;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    position: relative; /* Added to position the canvas absolutely */
+    overflow: hidden; /* Hide any overflow from the canvas */
+}
+
+canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1; /* Ensure canvas is behind all other elements */
+}
+
+.container {
+    text-align: center;
+}
+
+.login-form {
+    background-color: #121212;
+    border-radius: 10px;
+    padding: 40px;
+    position: relative;
+    width: 300px;
+    overflow: visible;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: box-shadow 0.5s ease;
+}
+
+/* Main tracing dot */
+.login-form::before {
+    content: '';
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #00ff00;
+    border-radius: 50%;
+    animation: trace 4s linear infinite;
+    filter: blur(2px);
+    box-shadow: 0 0 4px #00ff00;
+    z-index: 2;
+    transition: opacity 0.3s ease;
+}
+
+/* Add hover state class */
+.login-form.hover-glow {
+    box-shadow: 0 0 15px #00ff00, 
+                0 0 25px #00ff00, 
+                0 0 35px #00ff00;
+    border-color: #00ff00;
+}
+
+.login-form.hover-glow::before {
+    opacity: 0;
+    animation-play-state: paused;
+}
+
+.login-form.hover-glow .trail-line {
+    opacity: 0;
+}
+
+/* Line trail effect */
+.trail-line {
+    position: absolute;
+    background-color: #00ff00;
+    filter: blur(1px);
+    opacity: 0;
+    z-index: 1;
+}
+
+/* Update trace animation */
+@keyframes trace {
+    0% {
+        top: -4px;
+        left: -4px;
+        box-shadow: 0 0 8px #00ff00;
+    }
+    25% {
+        top: -4px;
+        left: calc(100% + 4px);
+        transform: translateX(-100%);
+        box-shadow: 0 0 8px #00ff00;
+    }
+    50% {
+        top: calc(100% + 4px);
+        left: calc(100% + 4px);
+        transform: translate(-100%, -100%);
+        box-shadow: 0 0 8px #00ff00;
+    }
+    75% {
+        top: calc(100% + 4px);
+        left: -4px;
+        transform: translateY(-100%);
+        box-shadow: 0 0 8px #00ff00;
+    }
+    100% {
+        top: -4px;
+        left: -4px;
+        box-shadow: 0 0 8px #00ff00;
+    }
+}
+
+@keyframes fadeTrail {
+    0% {
+        opacity: 0.5;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+.input-group {
+    margin: 15px 0;
+    position: relative;
+    z-index: 1;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid rgba(0, 255, 0, 0.3);
+    border-radius: 5px;
+    background-color: rgba(42, 42, 42, 0.3);
+    color: #fff;
+    font-size: 16px;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+input:focus {
+    border-color: rgba(0, 255, 0, 0.8);
+}
+
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+button {
+    flex: 1;
+    background-color: transparent;
+    color: #00ff00;
+    border: 1px solid #00ff00;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+button:hover {
+    background-color: rgba(0, 255, 0, 0.2);
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.5);
+}
+
+h1 {
+    color: #00ff00;
+    margin-bottom: 30px;
+    position: relative;
+    z-index: 1;
+}
